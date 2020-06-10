@@ -1,0 +1,42 @@
+<div class="ui container">
+  <p id="notice"><%= notice %></p>
+
+  <h3>Categories</h3>
+
+  <table id='categories'>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @categories.each do |category| %>
+        <tr>
+          <td><%= link_to category.name, category %></td>
+          <td class='centered'>
+            <%= link_to 'Edit', edit_category_path(category) %> |
+            <%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#categories").dataTable({
+      "oLanguage": {
+        "sSearch": "Filter Data"
+      },
+      columnDefs: [
+        {
+          orderable: false,
+          targets: 1
+        }
+      ]
+    });
+  });
+</script>

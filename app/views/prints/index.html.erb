@@ -1,0 +1,40 @@
+<div class='ui container'>
+  <h3>Entries for today (<%= Date.today.strftime('%B %d, %Y') %>)</h3>
+  <table class='ui celled table'>
+    <thead>
+      <th>Type</th>
+      <th>Category</th>
+      <th>Amount</th>
+      <th>Activity Date</th>
+      <th>Notes</th>
+    </thead>
+    <tbody>
+      <% @entries.each do |entry| %>
+        <tr>
+          <td><%= entry.expense == 1 ? 'Expense' : 'Income' %></td>
+          <td><%= entry.category.name %></td>
+          <td><%= entry.amount %></td>
+          <td><%= entry.activity_date %></td>
+          <td><%= entry.notes %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div>
+    <%= link_to 'Print', '#', class: 'ui right floated button positive', id: 'print' %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#print').on('click', function(e) {
+      $.ajax({
+        url: '/prints/trigger'
+      }).
+      done(function(resp) {
+        alert('Printed in the logs');
+      });
+      e.preventDefault();
+    });
+  });
+</script>

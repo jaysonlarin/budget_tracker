@@ -1,0 +1,11 @@
+<div class="ui raised very padded text container segment">
+  <h4 class="ui dividing header">Edit Category Information</h4>
+
+  <%= render 'form', category: @category %>
+
+  <div class="ui buttons">
+    <%= link_to 'Show', @category, class: 'ui black button' %>
+    <div class="or"></div>
+    <%= link_to 'Back', categories_path, class: 'ui positive button' %>
+  </div>
+</div>

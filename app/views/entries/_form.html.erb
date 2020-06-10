@@ -1,0 +1,52 @@
+<%= form_with(model: entry, local: true, class: 'ui form') do |form| %>
+  <% if entry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
+
+      <ul>
+        <% entry.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="two fields">
+    <div class="field">
+      <div class="ui radio checkbox">
+        <%= form.radio_button :expense, 1 %>
+        <%= form.label :expense %>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <%= form.radio_button :expense, 0 %>
+        <%= form.label :income %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :category %>
+    <%= form.select(:category_id, Category.active.collect {|d| [d.name, d.id]}, {:include_blank => "Select"}) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount %>
+    <%= form.number_field :amount, step: :any %>
+  </div>
+
+  <div class="field">
+    <%= form.label :activity_date %>
+    <%= form.date_field :activity_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :notes %>
+    <%= form.text_field :notes %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Submit', {class: 'ui blue right floated button'} %>
+  </div>
+<% end %>

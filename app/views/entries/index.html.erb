@@ -1,0 +1,87 @@
+<div class="ui container">
+  <p id="notice"><%= notice %></p>
+
+  <h3>Expense / Income</h3>
+
+  <div class='ui segment right floated'>
+    <span>Minimum Date:<input name="min" id="min" type="date"></span>
+    <span>Maximum Date:<input name="max" id="max" type="date"></span>
+  </div>
+  <table id='entries'>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Category</th>
+        <th>Amount</th>
+        <th>Activity Date</th>
+        <th>Notes</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @entries.each do |entry| %>
+      <tr>
+        <td><%= entry.expense == 1 ? 'Expense' : 'Income' %></td>
+        <td><%= entry.category.name %></td>
+        <td><%= entry.amount %></td>
+        <td><%= entry.activity_date %></td>
+        <td><%= entry.notes %></td>
+        <td class="centered">
+          <%= link_to 'Edit', edit_entry_path(entry) %> |
+          <%= link_to 'Destroy', entry, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var minDateFilter = "";
+    var maxDateFilter = "";
+
+    var table = $("#entries").dataTable({
+      "oLanguage": {
+        "sSearch": "Filter Data"
+      },
+      columnDefs: [
+        {
+          orderable: false,
+          targets: 5
+        }
+      ]
+    });
+
+    $.fn.dataTableExt.afnFiltering.push(
+    function(oSettings, aData, iDataIndex) {
+      if (typeof aData._date == 'undefined') {
+        aData._date = new Date(aData[3]).getTime();
+      }
+
+      if (minDateFilter && !isNaN(minDateFilter)) {
+        if (aData._date < minDateFilter) {
+          return false;
+        }
+      }
+
+      if (maxDateFilter && !isNaN(maxDateFilter)) {
+        if (aData._date > maxDateFilter) {
+          return false;
+        }
+      }
+
+      return true;
+    });
+
+    $('#min').change(function() {
+      minDateFilter = new Date(this.value).getTime();
+      table.fnDraw();
+    });
+
+    $('#max').change(function() {
+      maxDateFilter = new Date(this.value).getTime();
+      table.fnDraw();
+    });
+  });
+</script>

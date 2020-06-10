@@ -1,0 +1,30 @@
+<div class="ui raised very padded text container segment">
+  <p id="notice"><%= notice %></p>
+
+  <h3><%= @entry.expense == 1 ? 'Expense' : 'Income' %> Entry</h3>
+  <p>
+    <strong>Category:</strong>
+    <%= @entry.category.name %>
+  </p>
+
+  <p>
+    <strong>Amount:</strong>
+    <%= @entry.amount %>
+  </p>
+
+  <p>
+    <strong>Activity Date:</strong>
+    <%= @entry.activity_date .strftime('%B %d, %Y')%>
+  </p>
+
+  <p>
+    <strong>Notes:</strong>
+    <%= @entry.notes %>
+  </p>
+
+  <div class="ui buttons">
+    <%= link_to 'Edit', edit_entry_path(@entry), class: 'ui button' %>
+    <div class="or"></div>
+    <%= link_to 'Back', entries_path, class: 'ui positive button' %>
+  </div>
+</div>

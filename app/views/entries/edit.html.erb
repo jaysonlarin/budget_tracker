@@ -1,0 +1,11 @@
+<div class="ui raised very padded text container segment">
+  <h4 class="ui dividing header">Edit Entry Information</h4>
+
+  <%= render 'form', entry: @entry %>
+
+  <div class="ui buttons">
+    <%= link_to 'Show', @entry, class: 'ui black button' %>
+    <div class="or"></div>
+    <%= link_to 'Back', entries_path, class: 'ui positive button' %>
+  </div>
+</div>

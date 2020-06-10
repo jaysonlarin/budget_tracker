@@ -1,0 +1,15 @@
+<div class="ui raised very padded text container segment">
+  <p id="notice"><%= notice %></p>
+
+  <h3>Category</h3>
+  <p>
+    <strong>Name:</strong>
+    <%= @category.name %>
+  </p>
+
+  <div class="ui buttons">
+    <%= link_to 'Edit', edit_category_path(@category), class: 'ui button' %>
+    <div class="or"></div>
+    <%= link_to 'Back', categories_path, class: 'ui positive button' %>
+  </div>
+</div>
