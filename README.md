@@ -1,24 +1,18 @@
-# README
+# Budget Tracker
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Simple budget tracker for your needs
 
-Things you may want to cover:
+#### View summary for current day on logs
+```
+SummaryJob.perform_now
+```
 
-* Ruby version
+#### Entries Page
+> This page is where expense/income entries are listed.
 
-* System dependencies
+#### Categories Page
+> This page is where all of the categories are listed.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+#### Todays Entries Page
+> This page shows all the entries for the current day.
+> This page has a `PRINT` button to list the entries (expense/income) of the current day in the logs/console using activejob.
